@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.user.zotero-remarkable-sync</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>__VENV__/bin/python</string>
+        <string>__HOME__/Scripts/zotero-remarkable/zotero_rm_sync.py</string>
+    </array>
+
+    <!-- Run every 5 minutes -->
+    <key>StartInterval</key>
+    <integer>300</integer>
+
+    <!-- Also trigger when Zotero storage folder changes (new PDF downloaded) -->
+    <key>WatchPaths</key>
+    <array>
+        <string>__HOME__/Zotero/storage</string>
+    </array>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+        <key>ZOTERO_LIBRARY_ID</key>
+        <string>__ZOTERO_LIBRARY_ID__</string>
+        <key>ZOTERO_API_KEY</key>
+        <string>__ZOTERO_API_KEY__</string>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>__HOME__/Scripts/zotero-remarkable/launchd.log</string>
+    <key>StandardErrorPath</key>
+    <string>__HOME__/Scripts/zotero-remarkable/launchd.log</string>
+
+    <!-- Don't run if already running -->
+    <key>KeepAlive</key>
+    <false/>
+
+    <key>Nice</key>
+    <integer>10</integer>
+</dict>
+</plist>

@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments
+venv/
+.venv/
+system-python/
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# State files
+.zotero_rm_sync_state.json
+
+# rmapi artifacts
+*.content
+*.metadata
