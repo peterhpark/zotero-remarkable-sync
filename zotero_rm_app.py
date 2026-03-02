@@ -12,6 +12,7 @@ REQUIREMENTS:
 import os
 import sys
 import json
+import plistlib
 import threading
 import subprocess
 from datetime import datetime
@@ -168,9 +169,15 @@ class ZoteroRMApp(rumps.App):
 
         def worker():
             try:
+                env = os.environ.copy()
+                if LAUNCHD_PLIST.exists():
+                    with open(LAUNCHD_PLIST, "rb") as f:
+                        plist_data = plistlib.load(f)
+                    env.update(plist_data.get("EnvironmentVariables", {}))
                 r = subprocess.run(
                     [PYTHON, str(SYNC_SCRIPT)] + list(args),
                     capture_output=True, text=True, timeout=600,
+                    env=env,
                 )
                 out = r.stdout + r.stderr
                 new = fail = skipped = 0
